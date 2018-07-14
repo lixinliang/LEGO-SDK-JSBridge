@@ -1,0 +1,17 @@
+{
+  "name": "LEGO-SDK-JSBridge",
+  "version": "1.0.0",
+  "repository": {},
+  "author": "UED.lixinliang",
+  "license": "MIT",
+  "devDependencies": {
+    "del": "^3.0.0",
+    "event-stream": "^3.3.4",
+    "fs-extra": "^4.0.2",
+    "gulp": "^3.9.1",
+    "gulp-dest": "^0.2.3",
+    "gulp-replace": "^0.6.1",
+    "inquirer": "^3.3.0",
+    "shelljs": "^0.7.8"
+  }
+}
