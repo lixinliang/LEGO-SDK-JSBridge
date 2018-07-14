@@ -1,0 +1,1 @@
+window.SDK = window.SDK || {};
