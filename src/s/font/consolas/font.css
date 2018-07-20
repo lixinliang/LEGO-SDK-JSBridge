@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'consolas';
+    src: url('/s/font/consolas/consolas.eot');
+    src: url('/s/font/consolas/consolas.eot?#iefix') format('embedded-opentype'),
+         url('/s/font/consolas/consolas.woff') format('woff'),
+         url('/s/font/consolas/consolas.ttf') format('truetype'),
+         url('/s/font/consolas/consolas.svg#ConsolasRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
