@@ -1,0 +1,312 @@
+[
+    'ui_actionsheet',
+    '使用 ActionSheet 可以弹出一个包含多个选项的对话框。',
+    [
+        [
+            '简单对话框',
+            {
+                title : 'Title',
+                buttonTitles : ['YY Live', 'YY Game'],
+            },
+        ],
+        [
+            '对话框',
+            {
+                title : 'Color',
+                buttonTitles : ['Red', 'Green', 'Blue'],
+                dangerButton : 0,
+                cancelButton : 'Noop',
+            },
+        ],
+    ],
+],
+[
+    'ui_alertview',
+    '使用 AlertView 模块弹出一个原生的警告对话框。',
+    [
+        [
+            '警告框',
+            {
+                title : 'Alert',
+            },
+        ],
+        [
+            '提问框',
+            {
+                title : 'Confirm',
+                buttonTitles : ['Yep', 'Nope'],
+            },
+        ],
+    ],
+],
+[
+    'ui_imagepreviewer',
+    '使用 ImagePreviewer 可以调起原生的图片浏览器。',
+    [
+        [
+            '网络资源预览',
+            {
+                URLs : [
+                    'http://www.huanju.cn/s/v1206/pic_logo_hj.png',
+                    'http://img2.dwstatic.com/huanju/1706/361557316344/1497602129593.jpg',
+                    'http://www.huanju.cn/s/v1702/pic_logo_dw.jpg',
+                    'http://www.huanju.cn/s/v1604/pic_logo_huya.jpg',
+                ],
+                currentURL : 'http://www.huanju.cn/s/v1206/pic_logo_hj.png',
+            },
+        ],
+        [
+            '本地资源预览',
+            {
+                URLs : [
+                    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKBAMAAAB/HNKOAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAElBMVEUAAAD/bAD/bAD/bAD/bAAAAABAihOJAAAABHRSTlMAfH1+w1SsLgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAA1SURBVAjXY2BgEGIAAiYXBSCp4uIEYroAOSpA0onBBEg6MzADSQMGIMcZqIYZxGRgMGZgAADHdwbq/AckWAAAAABJRU5ErkJggg==',
+                ],
+                currentURL : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKBAMAAAB/HNKOAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAElBMVEUAAAD/bAD/bAD/bAD/bAAAAABAihOJAAAABHRSTlMAfH1+w1SsLgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAA1SURBVAjXY2BgEGIAAiYXBSCp4uIEYroAOSpA0onBBEg6MzADSQMGIMcZqIYZxGRgMGZgAADHdwbq/AckWAAAAABJRU5ErkJggg==',
+            },
+        ],
+        [
+            '图片预览',
+            {
+                URLs : [
+                    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKBAMAAAB/HNKOAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAElBMVEUAAAD/bAD/bAD/bAD/bAAAAABAihOJAAAABHRSTlMAfH1+w1SsLgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAA1SURBVAjXY2BgEGIAAiYXBSCp4uIEYroAOSpA0onBBEg6MzADSQMGIMcZqIYZxGRgMGZgAADHdwbq/AckWAAAAABJRU5ErkJggg==',
+                    'http://www.huanju.cn/s/v1206/pic_logo_hj.png',
+                ],
+                currentURL : 'http://www.huanju.cn/s/v1206/pic_logo_hj.png',
+            },
+        ],
+    ],
+],
+[
+    'ui_modalcontroller',
+    'ModalController 跳转的页面，是以模态的形式呈现的。',
+    [
+        [
+            '打开页面',
+            {
+                opt : 'present',
+                path : 'http://wap.yy.com/',
+                modalType : 1,
+                modalWidth : 300,
+                modalHeight : 300,
+            },
+        ],
+        [
+            '传递参数',
+            {
+                opt : 'present',
+                path : (function(){ this.href = location.href; this.hash = '#web_param'; return this.href; }).call(document.createElement('a')),
+                modalType : 1,
+                modalWidth : 300,
+                modalHeight : 300,
+                args : {
+                    key : 'value',
+                },
+            },
+        ],
+    ],
+],
+[
+    'ui_navigationcontroller',
+    '使用 NavigationController 模块，你可以将应用跳转至下一个页面，也可以返回至上一个页面。',
+    [
+        [
+            '跳转新页面',
+            {
+                opt : 'push',
+                path : 'http://wap.yy.com/',
+            },
+        ],
+        [
+            '离开当前页面',
+            {
+                opt : 'pop',
+            },
+        ],
+        [
+            '传递参数',
+            {
+                opt : 'push',
+                path : (function(){ this.href = location.href; this.hash = '#web_param'; return this.href; }).call(document.createElement('a')),
+                args : {
+                    key : 'value',
+                },
+            },
+        ],
+    ],
+],
+[
+    'ui_navigationitem',
+    '使用 NavigationItem 模块可以自定义应用页面导航栏左侧按钮、右侧按钮以及页面标题。',
+    [
+        [
+            '标题',
+            {
+                title : 'Alert',
+            },
+        ],
+        [
+            '右侧按钮',
+            {
+                rightItem : 'http://bi.duowan.com/source/pcindex/img/part1/circle.png',
+                callback : function () {},
+            },
+        ],
+    ],
+],
+[
+    'ui_page',
+    '可使用 Page API 为每一个 Web 页面定义『标题文本』、『状态栏样式』、『导航栏样式』等。',
+    [
+        [
+            '设置指定页面',
+            {
+                urlPattern : 'http://wap.yy.com/',
+                title : '自定义标题',
+                statusBarHidden : true,
+            },
+        ],
+        [
+            '设置当前页面',
+            {
+                title : '自定义标题',
+            },
+        ],
+    ],
+],
+[
+    'ui_pagestate',
+    '使用 PageState 模块可以获取当前页面、应用的工作状态。',
+    [
+        [
+            '监听事件',
+            {
+                callback : function () {},
+            },
+        ],
+    ],
+],
+[
+    'ui_picker',
+    'Picker 组件为 WebView 提供一个多功能的选择器。',
+    [
+        [
+            '简单选择器',
+            {
+                title : 'Title',
+                columns : [
+                    [
+                        '1',
+                        '2',
+                        '3',
+                    ],
+                    [
+                        '+',
+                        '-',
+                        '*',
+                    ],
+                    [
+                        '4',
+                        '5',
+                    ],
+                ],
+                defaultValues : ['1', '+', '4'],
+            },
+            {
+                collapse : true,
+            },
+        ],
+        [
+            '联动选择器',
+            {
+                title : 'Menu',
+                columns : [
+                    {
+                        title : 'Food',
+                        item : [
+                            {
+                                title : 'Chick',
+                            },
+                            {
+                                title : 'Beef',
+                            },
+                        ],
+                    },
+                    {
+                        title : 'Drinks',
+                        item : [
+                            {
+                                title : 'Tea',
+                            },
+                            {
+                                title : 'Wine',
+                            },
+                        ],
+                    },
+                ],
+                columnTitles : ['Type', 'Dish'],
+                defaultValues : ['Food', 'Chick'],
+                isColumnsRelated : true,
+            },
+            {
+                collapse : true,
+            },
+        ],
+    ],
+],
+[
+    'ui_refresh',
+    '使用 Refresh 模块可以为 WebView 添加一个原生的下拉刷新控制器。',
+    [
+        [
+            '下拉刷新',
+            {
+                opt : 'create',
+            },
+        ],
+        [
+            '结束刷新',
+            {
+                opt : 'complete',
+            },
+        ],
+    ],
+],
+[
+    'ui_toast',
+    '使用 Toast 模块可以显示一个原生的 Loading 指示器。',
+    [
+        [
+            '加载中',
+            {
+                opt : 'show',
+                style : 'loading',
+                title : 'loading',
+                timeout : 1,
+            },
+        ],
+        [
+            '成功',
+            {
+                opt : 'show',
+                style : 'success',
+                title : 'success',
+                timeout : 1,
+            },
+        ],
+        [
+            '失败',
+            {
+                opt : 'show',
+                style : 'error',
+                title : 'error',
+                timeout : 1,
+            },
+        ],
+        [
+            '手动关闭',
+            {
+                opt : 'hide',
+            },
+        ],
+    ],
+],
