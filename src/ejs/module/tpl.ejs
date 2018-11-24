@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="//s1.yy.com/ued_web_static/lib/highlight/9.12.0/atom-one-light.min.css">
+    <link rel="stylesheet" href="./css/main.css" inline>
+    <link rel="stylesheet" href="/s/font/consolas/font.css">
+</head>
+<body ontouchstart="">
+    <header>
+        <h1>LEGO-SDK<span><%= subtitle %></span></h1>
+        <a href="https://github.com/LEGO-SDK/"><%- include('./svg') %></a>
+    </header>
+    <nav id="nav"></nav>
+    <article></article>
+    <aside><a href="#nav"></a></aside>
+    <footer><em><i>YY · UED Team</i></em></footer>
+    <script src="//s1.yy.com/ued_web_static/lib/promise/es6-promise.auto.min.js"></script>
+    <script src="//s1.yy.com/ued_web_static/lib/highlight/9.12.0/highlight.min.js"></script>
+    <script src="//s1.yy.com/ued_web_static/lib/highlight/9.12.0/json.min.js"></script>
+    <script src="//s1.yy.com/ued_web_static/lib/highlight/9.12.0/javascript.min.js"></script>
+    <script src="//s1.yy.com/ued_web_static/lib/art-template/4.12.1/template-web.js"></script>
+    <!-- @if env='dev' -->
+    <script src="./lib/proxy-any.min.js"></script>
+    <script src="./js/sdk-runtime.js"></script>
+    <!-- @endif -->
+    <!-- @if env='build' !>
+    <script src="//s1.yy.com/ued_web_static/lib/lego-sdk-jsbridge/SDK.js"></script>
+    <!-- @endif -->
+    <script id="tpl-nav" type="text/html">
+        {{ if api }}
+            {{ each api }}
+                {{ set name = $value[0] }}
+                {{ set list = $value[1] }}
+                <h3>{{ name }}</h3>
+                <ul>
+                    {{ each list }}
+                        <li>
+                            {{ set id = name + '.' + $value }}
+                            {{ set anchor = name.toLowerCase() + '_' + $value.toLowerCase() }}
+                            <a href="#{{ anchor }}">{{ $value }}{{ { key : anchor, value : id } | save }}</a>
+                        </li>
+                    {{ /each }}
+                </ul>
+            {{ /each }}
+        {{ /if }}
+    </script>
+    <script>
+        var api = <%- api %>;
+        template.defaults.imports.save = function ( hash ) {
+            api[hash.key] = hash.value;
+            return '';
+        };
+        document.querySelector('nav').innerHTML = template('tpl-nav', { api : api });
+    </script>
+    <script>
+        var list = [
+            <%- include('example_native') %>
+            <%- include('example_ui') %>
+            <%- include('example_webview') %>
+            <%- include('example_web') %>
+            <%- include('example_test') %>
+            <%- include('example_orz') %>
+        ];
+    </script>
+    <script id="tpl-list" type="text/html">
+        {{ if list }}
+            {{ each list }}
+                {{ set id = $value[0] }}
+                {{ set desc = $value[1] }}
+                {{ set item = $value[2] }}
+                {{ set index = $index }}
+                {{ set methodName = $imports.moduleName(id) }}
+                {{ if methodName }}
+                    <section id="{{ id }}">
+                        <p>{{ methodName }}</p>
+                        <span>{{ desc }}</span>
+                        {{ each item }}
+                        {{ set button = $value[0] }}
+                        {{ set code = $value[1] }}
+                        {{ set option = $value[2] }}
+                        {{ include 'tpl-code', ({ methodName : methodName, code : code, option : option }) }}
+                        {{ set j = $index }}
+                        {{ $imports.button(id, index) }}
+                        <button data-name="{{ methodName }}" data-index="{{ $index }}">{{ button }}</button>
+                        {{ /each }}
+                    </section>
+                {{ /if }}
+            {{ /each }}
+        {{ /if }}
+    </script>
+    <script id="tpl-code" type="text/html">
+        {{ if code }}
+            <div>
+                {{ if option }}
+                    {{ if option.collapse }}
+                        <input type="checkbox">
+                    {{ /if }}
+                {{ /if }}
+                <pre><code class="javascript">{{ methodName, code | format }}</code></pre>
+            </div>
+        {{ /if }}
+    </script>
+    <script id="tpl-json" type="text/html">
+        {{ if json }}
+            <div>
+                <pre><code class="json">{{ json | stringify }}</code></pre>
+            </div>
+        {{ /if }}
+    </script>
+    <script>
+        template.defaults.imports.moduleName = function ( id ) {
+            return api[id];
+        };
+        template.defaults.imports.format = function ( methodName, code ) {
+            if ('callback' in code) {
+                code.callback = '@@callback';
+                return 'SDK.' + methodName + '(' + JSON.stringify(code, null, 2).replace(/"@@callback"/, '(result) => {}') + ')';
+            } else {
+                return 'const result = await SDK.' + methodName + '(' + JSON.stringify(code, null, 2) + ')';
+            }
+        };
+        template.defaults.imports.stringify = function ( json ) {
+            return JSON.stringify(json, null, 2);
+        };
+        template.defaults.imports.button = function ( id, i ) {
+            list[api[id]] = list[i][2].map(function ( item ) { return item[1] });
+        };
+        document.querySelector('article').innerHTML = template('tpl-list', { list : list });
+        [].slice.call(document.querySelectorAll('button')).forEach(function ( button ) {
+            function callback ( json ) {
+                var div = document.createElement('div');
+                div.innerHTML = template('tpl-json', { json : json });
+                var html = div.firstElementChild;
+                button.parentElement.insertBefore(html, button);
+                hljs.highlightBlock(html.querySelector('code'));
+            }
+            button.addEventListener('click', function () {
+                var methodName = button.dataset.name;
+                var methodParam = list[methodName][button.dataset.index];
+                if (methodName == 'Test.File') {
+                    if (!button.nextElementSibling) {
+                        var input = document.createElement('input');
+                        input.type = 'file';
+                        input.multiple = 'multiple';
+                        input.accept = 'image/*';
+                        input.onchange = function () {
+                            if (input.files.length) {
+                                [].slice.call(input.files).forEach(function ( file ) {
+                                    var obj = {};
+                                    obj.name = file.name;
+                                    obj.size = file.size;
+                                    obj.type = file.type;
+                                    callback(obj);
+                                    var img = new Image;
+                                    img.alt = file.name;
+                                    button.parentElement.insertBefore(img, button);
+                                    var reader = new FileReader;
+                                    reader.readAsDataURL(file);
+                                    reader.onload = function () {
+                                        img.src = reader.result;
+                                    };
+                                });
+                            }
+                        };
+                        button.parentElement.appendChild(input);
+                    }
+                    button.nextElementSibling.click();
+                    return;
+                }
+                var method = SDK;
+                methodName.split('.').forEach(function ( name ) {
+                    method = method[name];
+                });
+                if (methodParam.callback) {
+                    methodParam.callback = callback;
+                }
+                var result = method(methodParam);
+                if (methodParam.callback) {
+                    return;
+                }
+                if (result) {
+                    if (result.then) {
+                        result.then(callback);
+                    } else {
+                        callback(result);
+                    }
+                }
+            }, false);
+        });
+        hljs.initHighlightingOnLoad();
+        if (!location.hash) {
+            location.hash = '#nav';
+        }
+    </script>
+    <script>
+        document.addEventListener('click', function ( event ) {
+            if (event.target.matches('a')) {
+                if (event.target.matches('aside a')) {
+                    return;
+                }
+                if (JSMessage && JSMessage.constructor === JSMessage.constructor) {
+                    event.preventDefault();
+                    SDK.UI.NavigationController({ opt : 'push', path : event.target.href });
+                }
+            }
+        }, false);
+    </script>
+</body>
+</html>
