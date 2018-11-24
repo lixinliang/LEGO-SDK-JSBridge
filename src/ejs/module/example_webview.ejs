@@ -1,0 +1,33 @@
+[
+    'webview_preload',
+    '使用 Preload 可以加速 WebView 加载。',
+    [
+        [
+            '设置 Preload',
+            {
+                url : 'http://yourserver/xxx.html',
+                token : 'testToken',
+            },
+        ],
+    ],
+],
+[
+    'webview_skeleton',
+    '使用 WebView.Skeleton 可以在避免 WebView 加载过程中出现白屏的尴尬情况。',
+    [
+        [
+            '设置 Skeleton',
+            {
+                opt : 'snapshot',
+                targetURL : 'http://yourserver/xxx.html',
+                snapshotURL : 'http://yourserver/xxx.html',
+            },
+        ],
+        [
+            '隐藏 Skeleton',
+            {
+                opt : 'dismiss',
+            },
+        ],
+    ],
+],
