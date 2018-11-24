@@ -1,0 +1,57 @@
+<% var title = 'LEGO-SDK-JSBridge Demo' %>
+
+<% var subtitle = '' %>
+
+<% var api = JSON.stringify([
+    [
+        'Native',
+        [
+            'Check',
+            'Device',
+            'FileManager',
+            'HTTPRequest',
+            'Notification',
+            'OpenIntent',
+            'OpenURL',
+            'Pasteboard',
+            'UserDefaults',
+        ],
+    ],
+    [
+        'UI',
+        [
+            'ActionSheet',
+            'AlertView',
+            'ImagePreviewer',
+            'ModalController',
+            'NavigationController',
+            'NavigationItem',
+            'Page',
+            'PageState',
+            'Picker',
+            'Refresh',
+            'Toast',
+        ],
+    ],
+    [
+        'WebView',
+        [
+            'Preload',
+            'Skeleton',
+        ],
+    ],
+    [
+        'Web',
+        [
+            'Param',
+        ],
+    ],
+    [
+        'Test',
+        [
+            'File',
+        ],
+    ],
+]) %>
+
+<%- include('./module/tpl', { title : title, subtitle : subtitle, api : api }) %>
