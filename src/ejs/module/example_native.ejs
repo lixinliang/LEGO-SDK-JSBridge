@@ -1,0 +1,171 @@
+[
+    'native_check',
+    '使用 Check API 检查当前 SDK 版本以及当前 SDK 可用的模块。',
+    [
+        [
+            '查看可用模块',
+            {},
+        ],
+    ],
+],
+[
+    'native_device',
+    '使用 Device 模块获取当前设备的信息。',
+    [
+        [
+            '查看设备信息',
+            {},
+        ],
+    ],
+],
+[
+    'native_filemanager',
+    '使用 FileManager 操控沙箱中的任意文件。',
+    [
+        [
+            '写入文件',
+            {
+                opt : 'update',
+                suite : 'Caches',
+                filePath : 'test.txt',
+                fileContents : 'hello world!',
+            },
+        ],
+        [
+            '读取文件',
+            {
+                opt : 'read',
+                suite : 'Caches',
+                filePath : 'test.txt',
+            },
+        ],
+    ],
+],
+[
+    'native_httprequest',
+    '使用 HTTPRequest 模块可以突破跨域限制，无须JSONP，直接获取任意HTTP数据。',
+    [
+        [
+            '请求接口',
+            {
+                URL : 'https://status.github.com/api.json',
+            },
+        ],
+        [
+            '请求资源',
+            {
+                URL : 'https://oaapp.hiido.com/html/images/userHead.png',
+            },
+        ],
+    ],
+],
+[
+    'native_notification',
+    '使用 Notification 可以跨 WebView 通讯，而 Notification 在 iOS 中实际上就是 NSNotification，在 Android 中实际上就是 Boardcast。',
+    [
+        [
+            '监听事件',
+            {
+                opt: 'create',
+                name : 'test.event',
+                callback : function () {},
+            },
+        ],
+        [
+            '发送通知',
+            {
+                opt : 'post',
+                name : 'test.event',
+                aPostObject : 'Hello',
+                aPostUserInfo : {
+                    key : 'value',
+                },
+            },
+        ],
+        [
+            '移除监听',
+            {
+                opt : 'delete',
+                name : 'test.event',
+            },
+        ],
+    ],
+],
+[
+    'native_openintent',
+    '使用 OpenIntent 打开某个应用，或者让应用决定应该如何响应 URL。',
+    [
+        [
+            '调起应用',
+            {
+                name : 'com.tencent.mm',
+                action : 'com.tencent.mm.ui.LauncherUI',
+            },
+        ],
+    ],
+],
+[
+    'native_openurl',
+    '使用 OpenURL 打开某个应用，或者让应用决定应该如何响应 URL。',
+    [
+        [
+            '打开 URL',
+            {
+                URL : 'wechat://',
+            },
+        ],
+    ],
+],
+[
+    'native_pasteboard',
+    '使用 Pasteboard 模块可以将文本内容暂存到系统剪贴板中。',
+    [
+        [
+            '写入剪贴板内容',
+            {
+                opt : 'update',
+                string : 'Test',
+            },
+        ],
+        [
+            '读取剪贴板内容',
+            {
+                opt : 'read',
+            },
+        ],
+        [
+            '清空剪贴板内容',
+            {
+                opt : 'delete',
+            },
+        ],
+    ],
+],
+[
+    'native_userdefaults',
+    'UserDefaults 模块可以保存一些简单的数据，并持久化到闪存中。',
+    [
+        [
+            '写入数据',
+            {
+                opt : 'update',
+                key : 'test.key',
+                value : 'test.value',
+            },
+        ],
+        [
+            '读取数据',
+            {
+                opt : 'read',
+                key : 'test.key',
+            },
+        ],
+        [
+            '删除数据',
+            {
+                opt : 'delete',
+                key : 'test.key',
+            },
+        ],
+    ],
+],
